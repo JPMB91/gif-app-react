@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/api/gifs"
+  to = "/.netlify/functions/gifs"
+  status = 200
