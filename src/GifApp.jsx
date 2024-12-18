@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { AddCategory } from "./components/AddCategory";
-import { GifGrid } from "./components/GifGrid";
+import { AddCategory, GifGrid } from "./components";
 
 export const GifApp = () => {
-  const [categories, setCategories] = useState(["One punch", "Arale"]);
+  const [categories, setCategories] = useState(["Arale"]);
 
   const onAddCategory = (newCategory) => {
     // no se admiten repetidos

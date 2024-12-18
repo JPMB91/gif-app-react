@@ -1,9 +1,11 @@
 * {
   font-family: Helvetica, Arial, sans-serif;
-  background-color: rgb(234, 234, 234);
+
 }
 
 body {
+  background-color: #1d2026;
+  color: #ffffff;
   padding: 60px;
 }
 
@@ -18,13 +20,17 @@ input {
   width: 100%;
 }
 
-h2 {
-  font-size: 1.5rem;
+h1 {
+  font-size: 3rem;
+  margin: 1rem;
+  text-align: center;
 }
 
-h3 {
-  font-size: 3rem;
+h2 {
+  font-size: 2rem;
   margin-bottom: 5px;
+  padding: 1rem;
+
 }
 
 .card-grid {
@@ -40,6 +46,7 @@ h3 {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.03);
+  color: black;
   display: flex;
   flex-direction: column;
   height: 0%;

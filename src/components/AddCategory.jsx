@@ -1,9 +1,10 @@
+import { Box, TextField } from "@mui/material";
 import Proptypes from "prop-types";
 import { useState } from "react";
 
 export const AddCategory = ({ onNewCategory }) => {
   //? Manejamos el estado del input value como un valor que cambia
-  const [inputValue, setInputValue] = useState(" ");
+  const [inputValue, setInputValue] = useState("");
 
   const handleInputValue = (e) => {
     setInputValue(e.target.value);
@@ -21,19 +22,42 @@ export const AddCategory = ({ onNewCategory }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        placeholder="Buscar Gifs"
-        value={inputValue}
-        onChange={handleInputValue}
-      />
-
-      <button type="submit">Buscar</button>
+      <Box
+        sx={{
+      
+          backgroundColor: "white",
+          border: "1px solid rgb(97, 32, 158)",
+          borderRadius: "5px",
+          color: "black",
+          display: "flex",
+          fontSize: "1.2rem",
+          margin: "0 auto",
+          maxWidth: "100%",
+          padding: "10px 15px",
+          width: "60%",
+        }}
+      >
+        <TextField
+          value={inputValue}
+          onChange={handleInputValue}
+          fullWidth
+          label="Buscar Gifs"
+          id="fullWidth"
+          sx={{
+            input: {
+              alignSelf: "center",
+              borderRadius: "5px",
+              color: "black",
+              display: "flex",
+              padding: "10px 15px",
+            },
+          }}
+        />
+      </Box>
     </form>
   );
 };
 
 AddCategory.propTypes = {
-  // setCategories: Proptypes.func.isRequired,
   onNewCategory: Proptypes.func,
 };
