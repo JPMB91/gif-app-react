@@ -1,38 +1,26 @@
-import axios from "axios";
+import fetch from 'node-fetch';
 
-export const handler = async(event) =>{
-  const { category } = event.queryStringParameters; 
-  const API_KEY = import.meta.env.VITE_GIF_KEY_TENOR;
-  const CLIENT_KEY = "Gif-app";
-  const LIMIT = 10;
-  const url = `https://tenor.googleapis.com/v2/search`;
+export async function handler(event) {
+  const { category } = event.queryStringParameters;  // Extract category from query params
+  const apiKey = import.meta.env.TENOR_API_KEY;  // Fetch API key from environment variables
+  const clientKey = "Gif-app";  // Set your client key
+  const limit = 10;  // Limit for GIFs
+
+  const url = `https://tenor.googleapis.com/v2/search?q=${category}&key=${apiKey}&client_key=${clientKey}&limit=${limit}`;
+
   try {
-    const response = await axios.get(url,{
-      params:{
-        q: category,
-        key: API_KEY,
-        client_key: CLIENT_KEY,
-        limit: LIMIT
-      }
-    });
-
-    const gifs = 
-      response.data.results.map((img) => ({
-        id: img.id,
-        title: img.tags[0],
-        url: img.media_formats.gif.url,
-      })
-    );
+    const response = await fetch(url);
+    const data = await response.json();
 
     return {
-      HttpStatusCode: 200,
-      body: JSON.stringify(gifs)
-    }
+      statusCode: 200,
+      body: JSON.stringify(data),  // Return the data back to the frontend
+    };
   } catch (error) {
-    console.log("Error fetching gifs", error);
-    return{
-      HttpStatusCode: 500,
-      body: JSON.stringify({error: "failed fecthing gifs"})
-    }
+    console.error("Error fetching data from Tenor API:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to fetch data' }),  // Return error if any
+    };
   }
 }
