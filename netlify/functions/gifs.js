@@ -1,21 +1,7 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
 import axios from "axios";
-dotenv.config();
 
-const app = express();
-const PORT = 3000;
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Allow requests from your frontend's domain
-//! reemplazar con url del host
-app.use(cors({ origin: "http://localhost:3000" }));
-
-app.get("/api/gifs", async (req, res) => {
-  const { category } = req.query;
+export const handler = async(event) =>{
+  const { category } = event.queryStringParameters; 
   const API_KEY = import.meta.env.VITE_GIF_KEY_TENOR;
   const CLIENT_KEY = "Gif-app";
   const LIMIT = 10;
@@ -30,19 +16,23 @@ app.get("/api/gifs", async (req, res) => {
       }
     });
 
-    res.json(
+    const gifs = 
       response.data.results.map((img) => ({
         id: img.id,
         title: img.tags[0],
         url: img.media_formats.gif.url,
-      }))
+      })
     );
+
+    return {
+      HttpStatusCode: 200,
+      body: JSON.stringify(gifs)
+    }
   } catch (error) {
     console.log("Error fetching gifs", error);
-    res.status(500).json({error: "failed fecthing gifs"})
+    return{
+      HttpStatusCode: 500,
+      body: JSON.stringify({error: "failed fecthing gifs"})
+    }
   }
-});
-
-app.listen(PORT, () => {
-  console.log("running");
-});
+}
