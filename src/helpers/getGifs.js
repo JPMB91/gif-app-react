@@ -37,4 +37,3 @@ export const getGifs = async (category) => {
     return [];  // Return an empty array or handle error appropriately
   }
 };
-

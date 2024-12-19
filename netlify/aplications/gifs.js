@@ -1,6 +1,4 @@
-import fetch from 'node-fetch';
-
-export async function handler(event) {
+export const handler = async (event) => {
   const { category } = event.queryStringParameters;  // Extract category from query params
   const apiKey = import.meta.env.TENOR_API_KEY;  // Fetch API key from environment variables
   const clientKey = "Gif-app";  // Set your client key
@@ -23,4 +21,4 @@ export async function handler(event) {
       body: JSON.stringify({ error: 'Failed to fetch data' }),  // Return error if any
     };
   }
-}
+};

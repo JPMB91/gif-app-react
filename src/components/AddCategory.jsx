@@ -24,7 +24,6 @@ export const AddCategory = ({ onNewCategory }) => {
     <form onSubmit={onSubmit}>
       <Box
         sx={{
-      
           backgroundColor: "white",
           border: "1px solid rgb(97, 32, 158)",
           borderRadius: "5px",
